@@ -17,6 +17,48 @@ const createUserService=async(payload:IUser):Promise<IUser | null>=>{
     
 }
 
+const getUserService=async():Promise<IUser[] | null>=>{
+    const users = User.find()
+    if(!users){
+        throw new Error("No data found")
+    }
+    return users
+}
+
+const getSingleUserService=async(id:string)=>{
+    
+    const singleUser = await User.findById(id).exec()
+    if(!singleUser){
+        throw new Error('User id is invalid')
+    } 
+    return singleUser
+}
+type IUpdateReponse<T> = { 
+    [  K in keyof T] : string | number
+ }
+const updateUserService=async(id:string,payload:IUpdateReponse<IUser>)=>{
+   
+    const updatedUser = await User.findByIdAndUpdate(id,payload,{ new: true })
+    if(!updatedUser){
+        throw new Error('User id is invalid')
+    } 
+    return updatedUser
+   
+}
+
+const deleteUserService=async(id:string)=>{
+    
+    const deletedUser = await User.findByIdAndDelete(id)
+    if(!deletedUser){
+        throw new Error('User id is invalid')
+    } 
+    return deletedUser
+}
+
 export const UserService={
-    createUserService
+    createUserService,
+    getUserService,
+    getSingleUserService,
+    updateUserService,
+    deleteUserService
 }

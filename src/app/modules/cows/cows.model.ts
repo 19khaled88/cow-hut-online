@@ -13,7 +13,7 @@ const cowSchema = new Schema<ICow,CowModel>(
       required: true,
     },
     price: {
-      type: String,
+      type: Number,
       required: true,
     },
     location: {
@@ -42,8 +42,9 @@ const cowSchema = new Schema<ICow,CowModel>(
       enum:category
     },
     seller: {
-      type: String,
+      type: Schema.Types.ObjectId,
       required: true,
+      ref:'User'
     },
   },
   { timestamps: true }

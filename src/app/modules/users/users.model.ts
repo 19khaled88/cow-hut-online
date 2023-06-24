@@ -35,10 +35,12 @@ const userSchema = new Schema<IUser, UserModel>(
     budget: {
       type: Number,
       required: true,
+      default:0
     },
     income: {
       type: Number,
       required: true,
+      default:0
     },
   },
   { timestamps: true }

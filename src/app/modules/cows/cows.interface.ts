@@ -21,7 +21,7 @@ export type Category = "Dairy" | "Beef" | "DualPurpose";
 export type ICow = {
   name: string;
   age: number;
-  price: string;
+  price: number;
   location: Location;
   breed: Breed;
   weight: string;
@@ -29,5 +29,14 @@ export type ICow = {
   category: Category;
   seller: string;
 };
+
+export type IGenericResponse<T>={
+  meta:{
+    page:number
+    limit:number
+    count:number 
+  }
+  data:T
+}
 
 export type CowModel = Model<ICow>;
