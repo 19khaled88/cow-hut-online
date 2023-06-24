@@ -1,16 +1,27 @@
-import express, { Application, NextFunction, Request, Response } from "express";
-import dotenv from "dotenv";
-import cors from "cors";
-dotenv.config();
+import express, { Application, NextFunction, Request, Response } from "express"
+import cors from 'cors'
+import routes from './routes/index'
+import ApiError from "./errors/ApiError";
+import globalErrorHandler from "./middleware/globalErrorHandler";
 const app: Application = express();
 
 //middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors());
-const port = 5001;
+
+
+//routes 
+app.use('/api/v1',routes)
+
+
+app.get('/',(req:Request,res:Response,next:NextFunction)=>{
+	throw new Error('Test path')
+	// next('Ore bana error')
+})
+
 app.get("/get", (req: Request, res: Response, next: NextFunction) => {
-	const number = 2;
+	const number:number = 2;
 
 	if (number === 1) {
 		res.status(200).json({
@@ -21,29 +32,22 @@ app.get("/get", (req: Request, res: Response, next: NextFunction) => {
 	next();
 });
 
-app.all('*',(req,res,next)=>{
-    // res.status(404).json({
-    //     status:'fail',
-    //     message:'can not find desired url'
-    // })
-    const err = new Error('can not find desired url');
-    err.status = 'fail';
-    err.statusCode = 404;
+//If no route found
 
-    next(err)
-})
+// app.all('*',(req,res,next)=>{
+//     // res.status(404).json({
+//     //     status:'fail',
+//     //     message:'can not find desired url'
+//     // })
+//     const err = new Error('can not find desired url');
+//     err?.status = 'fail';
+//     err?.statusCode = 404;
 
-app.listen(port, () => {
-	console.log(`server started at port ${port}`);
-});
+//     next(err)
+// })
 
-app.use((error, req, res, next) => {
-    error.statusCode = error.statusCode || 500
-    error.status = error.status || 'error'
-    res.status(error.statusCode).json({
-        success: false,
-        status:error.statusCode,
-        message: "response false",
-    });
-    next()
-});
+
+
+app.use(globalErrorHandler);
+
+export default app
