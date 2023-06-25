@@ -1,6 +1,6 @@
 type IOptions ={
     page?:number
-    limit:number
+    limit?:number
 }
 
 type IOptionReturn ={

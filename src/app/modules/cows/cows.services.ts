@@ -1,4 +1,5 @@
 import { PaginationHelper } from "../../../helper/paginationHelper";
+import { IUpdateReponse } from "../../../interfaces/common";
 import { IPaginationOption } from "../../../interfaces/pagination";
 import { ICow, IGenericResponse } from "./cows.interface";
 import { Cow } from "./cows.model";
@@ -45,7 +46,7 @@ const getSingleCowService = async (id: string) => {
 	return singleCow;
 };
 
-const updateCowService = async (id: string, payload) => {
+const updateCowService = async (id: string, payload:IUpdateReponse<ICow>) => {
 	const updatedCow = await Cow.findByIdAndUpdate(id, payload, { new: true });
 	if (!updatedCow) {
 		throw new Error("Cow id is invalid");

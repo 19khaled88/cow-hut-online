@@ -1,3 +1,4 @@
+import { IUpdateReponse } from "../../../interfaces/common"
 import { IUser } from "./users.interface"
 import { User } from "./users.model"
 
@@ -33,9 +34,9 @@ const getSingleUserService=async(id:string)=>{
     } 
     return singleUser
 }
-type IUpdateReponse<T> = { 
-    [  K in keyof T] : string | number
- }
+// type IUpdateReponse<T> = { 
+//     [  K in keyof T] : string | number
+//  }
 const updateUserService=async(id:string,payload:IUpdateReponse<IUser>)=>{
    
     const updatedUser = await User.findByIdAndUpdate(id,payload,{ new: true })
