@@ -14,33 +14,36 @@ app.use(cors());
 app.use("/api/v1", routes);
 
 app.get("/", (req: Request, res: Response, next: NextFunction) => {
-  throw new Error("Test path");
-  // next('Ore bana error')
+	throw new Error("Test path");
+	// next('Ore bana error')
 });
 
 app.get("/get", (req: Request, res: Response, next: NextFunction) => {
-  const number: number = 2;
+	const number: number = 2;
 
-  if (number === 1) {
-    res.status(200).json({
-      success: true,
-      message: "response true",
-    });
-  }
-  next();
+	if (number === 1) {
+		res.status(200).json({
+			success: true,
+			message: "response true",
+		});
+	}
+	next();
 });
 
 //If no route found
 
-app.all("*", (req, res, next) => {
-  // res.status(404).json({
-  //     status:'fail',
-  //     message:'can not find desired url'
-  // })
-  const err = new Error("Your route is not valid");
-
-  next(err);
-});
+app.all('*',(req,res,next)=>{
+    // res.status(404).json({
+    //     status:'fail',
+    //     message:'can not find desired url'
+    // })
+    
+    
+    // err?.status = 'fail';
+    // err?.statusCode = 404;
+    const err = new Error('Your route is not valid');
+    next(err)
+})
 
 app.use(globalErrorHandler);
 
