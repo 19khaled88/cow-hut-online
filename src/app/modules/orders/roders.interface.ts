@@ -7,6 +7,7 @@ export type IOrder = {
 	// cow: string;
 	buyer :Types.ObjectId | IUser
 	cow :Types.ObjectId | ICow 
+	
 	createdAt: Date;
 	updatedAt: Date;
 };
@@ -16,6 +17,10 @@ export interface IOrders extends Document{
 	cow :Types.ObjectId | ICow 
 	createdAt: Date;
 	updatedAt: Date;
+}
+export type IOrderService=  IOrder & {
+	balance:number;
+	price:number;
 }
 
 export type OrderModel = Model<IOrder>;
