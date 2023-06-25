@@ -1,8 +1,13 @@
 import { model, Schema } from "mongoose";
-import { breed, category, label, location } from "../../../constnts/cows.constants";
+import {
+  breed,
+  category,
+  label,
+  location,
+} from "../../../constnts/cows.constants";
 import { CowModel, ICow } from "./cows.interface";
 
-const cowSchema = new Schema<ICow,CowModel>(
+const cowSchema = new Schema<ICow, CowModel>(
   {
     name: {
       type: String,
@@ -19,12 +24,12 @@ const cowSchema = new Schema<ICow,CowModel>(
     location: {
       type: String,
       required: true,
-      enum:location
+      enum: location,
     },
     breed: {
       type: String,
       required: true,
-      enum:breed
+      enum: breed,
     },
     weight: {
       type: String,
@@ -33,21 +38,20 @@ const cowSchema = new Schema<ICow,CowModel>(
     label: {
       type: String,
       required: true,
-      enum:label
-      
+      enum: label,
     },
     category: {
       type: String,
       required: true,
-      enum:category
+      enum: category,
     },
     seller: {
       type: Schema.Types.ObjectId,
       required: true,
-      ref:'User'
+      ref: "User",
     },
   },
   { timestamps: true }
 );
 
-export const Cow = model<ICow,CowModel>("Cow", cowSchema);
+export const Cow = model<ICow, CowModel>("Cow", cowSchema);

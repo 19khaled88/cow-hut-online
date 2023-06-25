@@ -1,4 +1,5 @@
-import { Model } from "mongoose";
+import { Model, Types } from "mongoose";
+import { IUser } from "../users/users.interface";
 export type Location =
   | "Dhaka"
   | "Chattogram"
@@ -27,7 +28,7 @@ export type ICow = {
   weight: string;
   label: Label;
   category: Category;
-  seller: string;
+  seller: Types.ObjectId | IUser;
 };
 
 export type IGenericResponse<T>={
