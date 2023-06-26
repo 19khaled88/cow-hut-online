@@ -6,9 +6,9 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "npx tsc",
-    "start": "node dist/index.js",
+    "start": "node dist/server.js",
     "pro": "ts-node-dev --respawn --transpile-only src/server.ts",
-    "dev": "concurrently \"npx tsc --watch\" \"nodemon -q dist/index.js"
+    "dev": "concurrently \"npx tsc --watch\" \"nodemon -q dist/server.js"
   },
   "keywords": [],
   "author": "",
